@@ -10,10 +10,16 @@ namespace UnityGyroscope.Manager
         private         int             subscribers                     = 0;
 
         public          bool            HasGyroscope                    => SystemInfo.supportsGyroscope;
+        public          int             SamplingFrequency               { get; set; } = 16;
 
-        public          Quaternion?     Attitude                        => HasGyroscope ? (Quaternion?) Input.gyro.attitude                  : null;
-        public          Quaternion?     AttitudeConverted               => HasGyroscope ? (Quaternion?) ToUnityQuaternion(Attitude.Value)    : null;
+#if ENABLE_INPUT_SYSTEM
+        public          Vector3?        Gravity                         => HasGyroscope ? UnityEngine.InputSystem.GravitySensor.current?.gravity?.ReadValue()   : null;
+        public          Quaternion?     Attitude                        => HasGyroscope ? UnityEngine.InputSystem.AttitudeSensor.current?.attitude?.ReadValue() : null;
+#else
         public          Vector3?        Gravity                         => HasGyroscope ? (Vector3?)    Input.gyro.gravity                   : null;
+        public          Quaternion?     Attitude                        => HasGyroscope ? (Quaternion?) Input.gyro.attitude                  : null;
+#endif
+        public          Quaternion?     AttitudeConverted               => HasGyroscope ? (Quaternion?) ToUnityQuaternion(Attitude.Value)    : null;
 
         private void RefreshGyroState()
 	    {
@@ -29,9 +35,10 @@ namespace UnityGyroscope.Manager
 		    {
 #if ENABLE_INPUT_SYSTEM
                 UnityEngine.InputSystem.InputSystem.EnableDevice(UnityEngine.InputSystem.Gyroscope.current);
+                UnityEngine.InputSystem.Gyroscope.current.samplingFrequency = SamplingFrequency;
 #else
                 Input.gyro.enabled = true;
-                Input.gyro.updateInterval = 1000f / Application.targetFrameRate;
+                Input.gyro.updateInterval = 1000f / SamplingFrequency;
 #endif
             }
             else

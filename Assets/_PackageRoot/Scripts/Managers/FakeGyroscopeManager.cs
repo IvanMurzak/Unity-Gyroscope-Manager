@@ -8,6 +8,7 @@ namespace UnityGyroscope.Manager
         private static  Quaternion      ToUnityQuaternion(Quaternion q) => new Quaternion(q.x, q.y, -q.z, -q.w);
 
         public          bool            HasGyroscope                    => settings.hasGyroscope;
+        public          int             SamplingFrequency               { get; set; } = 16;
 
         public          Quaternion?     Attitude                        => (Quaternion?)Quaternion.Euler(settings.attitude.x, settings.attitude.y, settings.attitude.z);
         public          Quaternion?     AttitudeConverted               => (Quaternion?)ToUnityQuaternion(Attitude.Value);

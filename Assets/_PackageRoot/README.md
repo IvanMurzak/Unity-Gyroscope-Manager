@@ -1,7 +1,7 @@
 # Unity-Gyroscope-Manager
 ![npm](https://img.shields.io/npm/v/extensions.unity.gyroscope.manager) ![License](https://img.shields.io/github/license/IvanMurzak/Unity-Gyroscope-Manager)
 
-Unity Gyroscope manager. Base package for helpful Gyroscope tools. Such as [Parallax2D](https://github.com/IvanMurzak/Unity-Gyroscope-Parallax2D).
+Unity Gyroscope manager. Base package for helpful Gyroscope tools. Such as [Unity-Gyroscope-Parallax](https://github.com/IvanMurzak/Unity-Gyroscope-Parallax).
 
 ![image](https://user-images.githubusercontent.com/9135028/166438638-824e9d6c-62ad-413b-91cb-add4e42e6a4b.png)
 
@@ -10,7 +10,7 @@ Unity Gyroscope manager. Base package for helpful Gyroscope tools. Such as [Para
 ```json
 {
   "dependencies": {
-    "extensions.unity.gyroscope.manager": "1.0.5",
+    "extensions.unity.gyroscope.manager": "1.0.2",
   },
   "scopedRegistries": [
     {

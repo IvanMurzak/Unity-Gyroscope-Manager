@@ -15,20 +15,23 @@ namespace UnityGyroscope.Manager
             }
         }
 
+		[SerializeField] int samplingFrequency = 16;
 		[SerializeField] bool useFakeGyroscopeInEditor = true;
 		[SerializeField] FakeGyroscopeManager.Settings fakeGyroscopeSettings = new FakeGyroscopeManager.Settings();
 
 		void Awake()
         {
 			if (instance == null)
-				instance = Init(fakeGyroscopeSettings, useFakeGyroscopeInEditor && Application.isEditor);
+				instance = Init(fakeGyroscopeSettings, useFakeGyroscopeInEditor && Application.isEditor, samplingFrequency);
         }
 
-		static IGyroscopeManager Init(FakeGyroscopeManager.Settings fakeGyroscopeSettings, bool fake = false)
+		static IGyroscopeManager Init(FakeGyroscopeManager.Settings fakeGyroscopeSettings, bool fake = false, int samplingFrequency = 16)
 		{
 			var gyroscopeManager = fake ?
 				new GameObject().SetName("Fake Gyroscope Manager").GetOrAddComponent<FakeGyroscopeManager>() as IGyroscopeManager :
 				new GameObject().SetName("Gyroscope Manager").GetOrAddComponent<GyroscopeManager>() as IGyroscopeManager;
+
+			gyroscopeManager.SamplingFrequency = samplingFrequency;
 
 			if (fake) ((FakeGyroscopeManager)gyroscopeManager).settings = fakeGyroscopeSettings;
 
