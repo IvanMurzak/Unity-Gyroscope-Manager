@@ -15,7 +15,7 @@ Unity Gyroscope manager. Base package for helpful Gyroscope tools. Such as [Unit
 ```json
 {
   "dependencies": {
-    "extensions.unity.gyroscope.manager": "1.1.3",
+    "extensions.unity.gyroscope.manager": "1.2.0",
   },
   "scopedRegistries": [
     {
