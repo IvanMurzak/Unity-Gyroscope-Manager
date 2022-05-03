@@ -1,51 +1,31 @@
-# Unity-Package-Template
-UPM (Unity Package Manager) ready GitHub repository for Unity
-New Unity packages system is very easy to use and make your project much more cleaner.
-The repository helps you to create your own Unity package with dependecies.
+# Unity-Gyroscope-Manager
+![npm](https://img.shields.io/npm/v/extensions.unity.gyroscope.manager) ![License](https://img.shields.io/github/license/IvanMurzak/Unity-Gyroscope-Manager)
 
-# How to use
-- "Use this template" green button at top right corner of GitHub page
-- Clone your new repository
-- Add all your stuff to <code>Assets/_PackageRoot directory</code>
-- Update <code>Assets/_PackageRoot/package.json</code> to yours
-- (on Windows) execute <code>gitSubTreePushToUPM.bat</code>
-- (on Mac) execute <code>gitSubTreePushToUPM.makefile</code>
+Unity Gyroscope manager. Base package for helpful Gyroscope tools. Such as [Parallax2D](https://github.com/IvanMurzak/Unity-Gyroscope-Parallax2D).
 
-- (optional) Create release from UPM branch on GitHub web page for support different versions
+![image](https://user-images.githubusercontent.com/9135028/166438638-824e9d6c-62ad-413b-91cb-add4e42e6a4b.png)
 
-![alt text](https://neogeek.dev/images/creating-custom-packages-for-unity-2018.3--git-release.png)
-
-
-# How to import your package to Unity project
-You may use one of the variants
-
-## Variant 1
-- Select "Add package from git URL"
-- Paste URL to your GitHub repository with simple modification:
-- <code>https://github.com/USER/REPO.git#upm</code> 
-Dont forget to replace **USER** and **REPO** to yours
-
-![alt text](https://neogeek.dev/images/creating-custom-packages-for-unity-2018.3--package-manager.png)
-
-### **Or** you may use special version if you create one  
-<code>https://github.com/USER/REPO.git#v1.0.0</code>
-Dont forget to replace **USER** and **REPO** to yours
-
-## Variant 2
-Modify manifest.json file. Change <code>"your.own.package"</code> to the name of your package.
-Dont forget to replace **USER** and **REPO** to yours.
-<pre><code>{
-    "dependencies": {
-        "your.own.package": "https://github.com/USER/REPO.git#upm"
+# How to install
+- Add this code to <code>/Packages/manifest.json</code>
+```json
+{
+  "dependencies": {
+    "extensions.unity.gyroscope.manager": "1.0.0",
+  },
+  "scopedRegistries": [
+    {
+      "name": "Unity Extensions",
+      "url": "https://registry.npmjs.org",
+      "scopes": [
+        "extensions.unity"
+      ]
     }
+  ]
 }
-</code></pre>
+```
 
-### **Or** you may use special version if you create one
-Dont forget to replace **USER** and **REPO** to yours.
-<pre><code>{
-    "dependencies": {
-        "your.own.package": "https://github.com/USER/REPO.git#v1.0.0"
-    }
-}
-</code></pre>
+# How to use Fake Gyroscope
+- Create empty gameobject and add `Gyroscope` component on it
+- Activate `Use Fake Gyroscope In Editor`
+- Press `Play` button in Unity Editor
+- Change needed values in `Gyroscope` component.
