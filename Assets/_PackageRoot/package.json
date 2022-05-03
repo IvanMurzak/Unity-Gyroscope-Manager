@@ -1,9 +1,9 @@
 {
-    "name": "your.own.package",
-    "displayName": "Your own package",
+    "name": "extensions.unity.gyroscope.manager",
+    "displayName": "Unity Gyroscrop Manager",
     "version": "1.0.0",
     "unity": "2019.2",
-    "description": "Some description",
+    "description": "Unity Gyroscope manager. Base package for helpful Gyroscope tools.",
 	"dependencies": {
       
     }
