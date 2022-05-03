@@ -1,5 +1,9 @@
 using System;
 using UnityEngine;
+#if ENABLE_INPUT_SYSTEM
+using UnityEngine.InputSystem;
+using UInputSystem = UnityEngine.InputSystem.InputSystem;
+#endif
 
 namespace UnityGyroscope.Manager
 { 
@@ -7,14 +11,15 @@ namespace UnityGyroscope.Manager
     {
         private static  Quaternion      ToUnityQuaternion(Quaternion q) => new Quaternion(q.x, q.y, -q.z, -q.w);
 
-        private         int             subscribers                     = 0;
+        private         int             gravitySubscribers              = 0;
+        private         int             attitudeSubscribers             = 0;
 
         public          bool            HasGyroscope                    => SystemInfo.supportsGyroscope;
         public          int             SamplingFrequency               { get; set; } = 16;
 
 #if ENABLE_INPUT_SYSTEM
-        public          Vector3?        Gravity                         => HasGyroscope ? UnityEngine.InputSystem.GravitySensor.current?.gravity?.ReadValue()   : null;
-        public          Quaternion?     Attitude                        => HasGyroscope ? UnityEngine.InputSystem.AttitudeSensor.current?.attitude?.ReadValue() : null;
+        public          Vector3?        Gravity                         => HasGyroscope ? GravitySensor.current?.gravity?.ReadValue()   : null;
+        public          Quaternion?     Attitude                        => HasGyroscope ? AttitudeSensor.current?.attitude?.ReadValue() : null;
 #else
         public          Vector3?        Gravity                         => HasGyroscope ? (Vector3?)    Input.gyro.gravity                   : null;
         public          Quaternion?     Attitude                        => HasGyroscope ? (Quaternion?) Input.gyro.attitude                  : null;
@@ -23,7 +28,8 @@ namespace UnityGyroscope.Manager
 
         private void RefreshGyroState()
 	    {
-            subscribers = Math.Max(0, subscribers);
+            gravitySubscribers = Math.Max(0, gravitySubscribers);
+            attitudeSubscribers = Math.Max(0, attitudeSubscribers);
 
             if (!HasGyroscope)
             {
@@ -31,34 +37,84 @@ namespace UnityGyroscope.Manager
                 return;
             }
 
-            if (subscribers > 0)
-		    {
 #if ENABLE_INPUT_SYSTEM
-                UnityEngine.InputSystem.InputSystem.EnableDevice(UnityEngine.InputSystem.Gyroscope.current);
-                UnityEngine.InputSystem.Gyroscope.current.samplingFrequency = SamplingFrequency;
-#else
-                Input.gyro.enabled = true;
-                Input.gyro.updateInterval = 1000f / SamplingFrequency;
-#endif
+            if (gravitySubscribers > 0)
+		    {
+                if (GravitySensor.current == null)
+                {
+                    Debug.LogError("GravitySensor.current == null");
+                    return;
+                }
+
+                if (!GravitySensor.current.enabled)
+                {
+                    Debug.Log($"Enabling device: {GravitySensor.current.name}");
+                    UInputSystem.EnableDevice(GravitySensor.current);
+                }
+                GravitySensor.current.samplingFrequency = SamplingFrequency;
             }
             else
 		    {
-#if ENABLE_INPUT_SYSTEM
-                UnityEngine.InputSystem.InputSystem.DisableDevice(UnityEngine.InputSystem.Gyroscope.current);
-#else
-                Input.gyro.enabled = false;
-#endif
+                if (GravitySensor.current.enabled)
+                {
+                    Debug.Log($"Disabling device: {GravitySensor.current.name}");
+                    UInputSystem.DisableDevice(GravitySensor.current);
+                }
             }
-	    }
+            if (attitudeSubscribers > 0)
+            {
+                if (AttitudeSensor.current == null)
+                {
+                    Debug.LogError("GravitySensor.current == null");
+                    return;
+                }
 
-        public void Subscribe()
+                if (!AttitudeSensor.current.enabled)
+                {
+                    Debug.Log($"Enabling device: {AttitudeSensor.current.name}");
+                    UInputSystem.EnableDevice(AttitudeSensor.current);
+                }
+                AttitudeSensor.current.samplingFrequency = SamplingFrequency;
+            }
+            else
+            {
+                if (AttitudeSensor.current.enabled)
+                {
+                    Debug.Log($"Disabling device: {AttitudeSensor.current.name}");
+                    UInputSystem.DisableDevice(AttitudeSensor.current);
+                }
+            }
+#else
+            if (gravitySubscribers + attitudeSubscribers > 0)
+            {
+                Input.gyro.enabled = true;
+                Input.gyro.updateInterval = 1000f / SamplingFrequency;
+            }
+            else
+            {
+                Input.gyro.enabled = false;
+            }
+#endif
+        }
+
+        public void SubscribeGravity()
         {
-            subscribers++;
+            gravitySubscribers++;
             RefreshGyroState();
         }
-        public void Unsubscribe()
+        public void UnsubscribeGravity()
         {
-            subscribers--;
+            gravitySubscribers--;
+            RefreshGyroState();
+        }
+        public void SubscribeAttitude()
+        {
+            attitudeSubscribers++;
+            RefreshGyroState();
+        }
+        public void UnsubscribeAttitude()
+        {
+            attitudeSubscribers--;
             RefreshGyroState();
         }
     }

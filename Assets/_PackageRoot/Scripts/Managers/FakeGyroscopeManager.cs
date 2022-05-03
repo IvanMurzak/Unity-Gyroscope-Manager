@@ -16,8 +16,10 @@ namespace UnityGyroscope.Manager
 
         public          Settings        settings                        = new Settings();
 
-        public void Subscribe() { }
-        public void Unsubscribe() { }
+        public void SubscribeGravity() { }
+        public void UnsubscribeGravity() { }
+        public void SubscribeAttitude() { }
+        public void UnsubscribeAttitude() { }
 
         [Serializable]
         public class Settings

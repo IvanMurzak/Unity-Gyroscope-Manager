@@ -11,7 +11,9 @@ namespace UnityGyroscope.Manager
 		Vector3?	Gravity				{ get; }
 		GameObject	gameObject			{ get; }
 
-		void Subscribe();
-		void Unsubscribe();
+		void SubscribeGravity();
+		void UnsubscribeGravity();
+		void SubscribeAttitude();
+		void UnsubscribeAttitude();
 	}
 }
