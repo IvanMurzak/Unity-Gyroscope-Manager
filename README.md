@@ -3,6 +3,11 @@
 
 Unity Gyroscope manager. Base package for helpful Gyroscope tools. Such as [Unity-Gyroscope-Parallax](https://github.com/IvanMurzak/Unity-Gyroscope-Parallax).
 
+### Features
+- ✔️ support legacy Input System
+- ✔️ support new Input System
+- ✔️ ability to simulate gyroscope in Unity Editor
+
 ![image](https://user-images.githubusercontent.com/9135028/166438638-824e9d6c-62ad-413b-91cb-add4e42e6a4b.png)
 
 # How to install
