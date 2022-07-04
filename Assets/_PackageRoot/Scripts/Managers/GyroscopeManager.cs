@@ -15,7 +15,7 @@ namespace UnityGyroscope.Manager
         private         int             attitudeSubscribers             = 0;
 
         public          bool            HasGyroscope                    => SystemInfo.supportsGyroscope;
-        public          int             SamplingFrequency               { get; set; } = 16;
+        public          int             SamplingFrequency               { get; set; } = Gyroscope.DefaultSamplingFrequency;
 
 #if ENABLE_INPUT_SYSTEM
         public          Vector3?        Gravity                         => HasGyroscope ? GravitySensor.current?.gravity?.ReadValue()   : null;
@@ -52,6 +52,7 @@ namespace UnityGyroscope.Manager
                     UInputSystem.EnableDevice(GravitySensor.current);
                 }
                 GravitySensor.current.samplingFrequency = SamplingFrequency;
+                Debug.Log($"RefreshGyroState GravitySensor samplingFrequency: {SamplingFrequency}");
             }
             else
 		    {
@@ -75,6 +76,7 @@ namespace UnityGyroscope.Manager
                     UInputSystem.EnableDevice(AttitudeSensor.current);
                 }
                 AttitudeSensor.current.samplingFrequency = SamplingFrequency;
+                Debug.Log($"RefreshGyroState AttitudeSensor samplingFrequency: {SamplingFrequency}");
             }
             else
             {
@@ -87,11 +89,14 @@ namespace UnityGyroscope.Manager
 #else
             if (gravitySubscribers + attitudeSubscribers > 0)
             {
+                Debug.Log($"Enabling device: Input.gyro");
                 Input.gyro.enabled = true;
-                Input.gyro.updateInterval = 1000f / SamplingFrequency;
+                Input.gyro.updateInterval = 1f / SamplingFrequency;
+                Debug.Log($"RefreshGyroState Input.gyro.updateInterval: {Input.gyro.updateInterval}");
             }
             else
             {
+                Debug.Log($"Disabling device: Input.gyro");
                 Input.gyro.enabled = false;
             }
 #endif

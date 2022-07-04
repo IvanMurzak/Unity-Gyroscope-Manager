@@ -4,7 +4,7 @@ MonoImporter:
   externalObjects: {}
   serializedVersion: 2
   defaultReferences: []
-  executionOrder: 0
+  executionOrder: -10
   icon: {fileID: 2800000, guid: ee918f58ad1dadf49b7d74a0095d28e8, type: 3}
   userData: 
   assetBundleName: 

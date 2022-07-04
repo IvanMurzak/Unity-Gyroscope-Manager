@@ -4,6 +4,8 @@ namespace UnityGyroscope.Manager
 {
 	public class Gyroscope : MonoBehaviour
 	{
+		public const int DefaultSamplingFrequency = 32;
+
 		private static IGyroscopeManager instance;
 		public static IGyroscopeManager Instance
         {
@@ -15,7 +17,7 @@ namespace UnityGyroscope.Manager
             }
         }
 
-		[SerializeField] int samplingFrequency = 16;
+		[SerializeField] int samplingFrequency = DefaultSamplingFrequency;
 		[SerializeField] bool useFakeGyroscopeInEditor = true;
 		[SerializeField] FakeGyroscopeManager.Settings fakeGyroscopeSettings = new FakeGyroscopeManager.Settings();
 
@@ -25,8 +27,10 @@ namespace UnityGyroscope.Manager
 				instance = Init(fakeGyroscopeSettings, useFakeGyroscopeInEditor && Application.isEditor, samplingFrequency);
         }
 
-		static IGyroscopeManager Init(FakeGyroscopeManager.Settings fakeGyroscopeSettings, bool fake = false, int samplingFrequency = 16)
+		static IGyroscopeManager Init(FakeGyroscopeManager.Settings fakeGyroscopeSettings, bool fake = false, int samplingFrequency = DefaultSamplingFrequency)
 		{
+			Debug.Log($"Gyroscope.Init fake={fake}, samplingFrequency={samplingFrequency}");
+
 			var gyroscopeManager = fake ?
 				new GameObject().SetName("Fake Gyroscope Manager").GetOrAddComponent<FakeGyroscopeManager>() as IGyroscopeManager :
 				new GameObject().SetName("Gyroscope Manager").GetOrAddComponent<GyroscopeManager>() as IGyroscopeManager;

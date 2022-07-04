@@ -16,9 +16,9 @@ namespace UnityGyroscope.Manager
 
         public          Settings        settings                        = new Settings();
 
-        public void SubscribeGravity() { }
+        public void SubscribeGravity() => Debug.Log($"SubscribeGravity.SamplingFrequency: {SamplingFrequency}");
         public void UnsubscribeGravity() { }
-        public void SubscribeAttitude() { }
+        public void SubscribeAttitude() => Debug.Log($"SubscribeAttitude.SamplingFrequency: {SamplingFrequency}");
         public void UnsubscribeAttitude() { }
 
         [Serializable]
