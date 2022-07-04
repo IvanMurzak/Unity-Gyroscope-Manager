@@ -26,7 +26,7 @@ namespace UnityGyroscope.Manager
 	    {
             public bool     hasGyroscope    = true;
             public Vector3  attitude        = new Vector3(0, 0, 0);
-            public Vector3  gravity         = new Vector3(0, 0, 0);
+            public Vector3  gravity         = new Vector3(0, 0, 1);
 	    }
     }
 }
