@@ -10,7 +10,14 @@ Unity Gyroscope manager. Base package for helpful Gyroscope tools. Such as [Unit
 
 ![image](https://user-images.githubusercontent.com/9135028/166438638-824e9d6c-62ad-413b-91cb-add4e42e6a4b.png)
 
-# How to install
+# How to install - Option 1 (RECOMMENDED)
+
+- Install [OpenUPM-CLI](https://github.com/openupm/openupm-cli#installation)
+- Open command line in Unity project folder
+- `openupm --registry https://registry.npmjs.org add extensions.unity.gyroscope.manager`
+
+# How to install - Option 2
+
 - Add this code to <code>/Packages/manifest.json</code>
 ```json
 {
