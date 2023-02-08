@@ -26,10 +26,10 @@ Unity Gyroscope manager. Base package for helpful Gyroscope tools. Such as [Unit
   },
   "scopedRegistries": [
     {
-      "name": "Unity Extensions",
-      "url": "https://registry.npmjs.org",
+      "name": "package.openupm.com",
+      "url": "https://package.openupm.com",
       "scopes": [
-        "extensions.unity"
+        "extensions.unity.gyroscope.manager"
       ]
     }
   ]
