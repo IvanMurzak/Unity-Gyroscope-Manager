@@ -1,11 +1,11 @@
 {
-    "name": "extensions.unity.gyroscope.manager",
-    "displayName": "Unity Gyroscope Manager",
-	"author": { "name": "Ivan Murzak", "url": "https://github.com/IvanMurzak" },
-    "version": "1.2.6",
-    "unity": "2019.2",
-    "description": "Unity Gyroscope manager. Base package for helpful Gyroscope tools.",
-	"dependencies": {
+  "name": "extensions.unity.gyroscope.manager",
+  "displayName": "Unity Gyroscope Manager",
+  "author": { "name": "Ivan Murzak", "url": "https://github.com/IvanMurzak" },
+  "version": "1.2.6",
+  "unity": "2019.2",
+  "description": "Unity Gyroscope manager. Base package for helpful Gyroscope tools.",
+  "dependencies": {
       
-    }
+  }
 }
