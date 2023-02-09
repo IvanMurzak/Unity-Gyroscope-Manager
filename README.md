@@ -29,7 +29,7 @@ Unity Gyroscope manager. Base package for helpful Gyroscope tools. Such as [Unit
       "name": "package.openupm.com",
       "url": "https://package.openupm.com",
       "scopes": [
-        "extensions.unity.gyroscope.manager"
+        "extensions.unity"
       ]
     }
   ]
