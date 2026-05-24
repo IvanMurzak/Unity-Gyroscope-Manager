@@ -1,0 +1,16 @@
+{
+    "name": "extensions.unity.gyroscope.manager.Installer",
+    "rootNamespace": "extensions.unity.gyroscope.manager.Installer",
+    "references": [],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

@@ -1,0 +1,22 @@
+{
+    "name": "extensions.unity.gyroscope.manager.Installer.Tests",
+    "rootNamespace": "extensions.unity.gyroscope.manager.Installer.Tests",
+    "references": [
+        "extensions.unity.gyroscope.manager.Installer"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "precompiledReferences": [
+        "nunit.framework.dll"
+    ],
+    "autoReferenced": false,
+    "defineConstraints": [
+        "UNITY_INCLUDE_TESTS"
+    ],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
