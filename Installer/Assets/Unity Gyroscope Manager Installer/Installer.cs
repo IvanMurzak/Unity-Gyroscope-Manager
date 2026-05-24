@@ -16,7 +16,7 @@ namespace extensions.unity.gyroscope.manager.Installer
     public static partial class Installer
     {
         public const string PackageId = "extensions.unity.gyroscope.manager";
-        public const string Version = "1.2.7";
+        public const string Version = "1.2.8";
 
         static Installer()
         {
